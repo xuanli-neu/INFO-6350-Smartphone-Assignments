@@ -19,6 +19,7 @@ class ViewController: UIViewController {
     
     let cardNames = ["2C", "2D", "2H", "2S", "3C", "3D", "3H", "3S", "4C", "4D", "4H", "4S", "5C", "5D", "5H", "5S", "6C", "6D", "6H", "6S", "7C", "7D", "7H", "7S", "8C", "8D", "8H", "8S", "9C", "9D", "9H", "9S", "10C", "10D", "10H", "10S", "AC", "AD", "AH", "AS", "JC", "JD", "JH", "JS", "QC", "QD", "QH", "QS", "KC", "KD", "KH", "KS"]
     
+    var isWinner = false;
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -26,7 +27,11 @@ class ViewController: UIViewController {
     }
 
     @IBAction func playAction(_ sender: UIButton) {
-        rollCard()
+        if(isWinner){
+            showAlertButton()
+        }else{
+            rollCard()
+        }
     }
     
     func rollCard(){
@@ -51,27 +56,46 @@ class ViewController: UIViewController {
         card5.image = UIImage(named: cardNames[val5])
         card6.image = UIImage(named: cardNames[val6])
         
+        isWinner = false
+        
         if cardNames[val1] == "AS"{
             lblWinner.text = "The winner is player 1"
+            isWinner = true
         }
         else if cardNames[val2] == "AS"{
             lblWinner.text = "The winner is player 1"
+            isWinner = true
         }
         else if cardNames[val3] == "AS"{
             lblWinner.text = "The winner is player 1"
+            isWinner = true
         }
         else if cardNames[val4] == "AS"{
             lblWinner.text = "The winner is player 2"
+            isWinner = true
         }
         else if cardNames[val5] == "AS"{
             lblWinner.text = "The winner is player 2"
+            isWinner = true
         }
         else if cardNames[val6] == "AS"{
             lblWinner.text = "The winner is player 2"
+            isWinner = true
         }
         else{
             lblWinner.text = "No winner"
         }
+    }
+    
+    func showAlertButton(){
+        let alert = UIAlertController(title:"Alert", message:"Do you want to play again?", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title:"Yes", style: UIAlertAction.Style.default, handler:playAgain))
+        alert.addAction(UIAlertAction(title:"No", style: UIAlertAction.Style.cancel, handler:nil))
+        self.present(alert, animated: true, completion:nil)
+    }
+    
+    func playAgain(action: UIAlertAction){
+        rollCard();
     }
 }
 
