@@ -2,8 +2,6 @@
 //  AppDelegate.swift
 //  StockApp
 //
-//  Created by Jing Zou on 11/2/20.
-//
 
 import UIKit
 
